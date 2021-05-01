@@ -1,0 +1,29 @@
+{
+  "name": "cli-features",
+  "version": "1.0.0",
+  "description": "Convenient interface for communicating with the user from the command line",
+  "main": "cli-features.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KolmaginDanil/cli-features.git"
+  },
+  "keywords": [
+    "command",
+    "stdin",
+    "stdout",
+    "cli",
+    "menu"
+  ],
+  "author": "dkolmahin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KolmaginDanil/cli-features/issues"
+  },
+  "homepage": "https://github.com/KolmaginDanil/cli-features#readme",
+  "devDependencies": {
+    "prettier": "2.2.1"
+  }
+}
