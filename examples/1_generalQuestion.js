@@ -17,14 +17,25 @@ const Questioner = require('../lib/questioner');
     },
     {
       name: 'onSomeDigit',
-      keys: ['0123456789'],
-      onKeyPress: ({ modifyInputStr }) => ({ respStr }) =>
-        modifyInputStr(respStr),
+      keys: [...'0123456789'],
+      onKeyPress: ({ rewriteInputStr }) => ({
+        respStr,
+        currentStr,
+        position,
+      }) =>
+        rewriteInputStr(
+          currentStr.slice(0, currentStr.length + position) +
+            respStr +
+            currentStr.slice(currentStr.length + position, currentStr.length)
+        ),
     },
   ];
 
   result.name = await generalQuestion('What is your name?');
   result.age = await generalQuestion('What is your age?', keysController);
+  result.password = await generalQuestion('Your password:', [], {
+    isPass: true,
+  });
 
   console.log(result);
 })();
