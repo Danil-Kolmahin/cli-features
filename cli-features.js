@@ -1,11 +1,9 @@
 'use strict';
 
-const Questioner = require('./lib/questioner');
-const TerminalListener = require('./lib/terminalListener');
-const commonKeysActions = require('./lib/commonKeysActions');
+const Questioner = require('./lib/questioner/questioner');
+const EscSequences = require('./lib/escSequences/escSequences');
 
 module.exports = {
   Questioner,
-  TerminalListener,
-  commonKeysActions,
+  EscSequences,
 };
