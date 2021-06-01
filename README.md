@@ -12,7 +12,7 @@ const { generalQuestion } = new Questioner({
 
 generalQuestion('What is your name?').then(console.log);
 ```
-![](./assets/basicUsage.gif)
+![](https://drive.google.com/uc?export=view&id=13oP-cZmHtfB7UXLIUqfoq64DULo5EHrO)
 
 From [examples/1_generalQuestion.js](./examples/1_generalQuestion.js):
 ```js
@@ -48,4 +48,4 @@ const { Questioner } = require('cli-features');
   console.log(result);
 })();
 ```
-![](./assets/generalQuestions.gif)
+![](https://drive.google.com/uc?export=view&id=1z9avImuKwU1S_iZNTOEKC1qhdsl0uNju)
