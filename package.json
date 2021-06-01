@@ -1,6 +1,6 @@
 {
   "name": "cli-features",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convenient interface for communicating with the user from the command line",
   "main": "cli-features.js",
   "scripts": {
