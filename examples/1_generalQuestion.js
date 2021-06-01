@@ -15,13 +15,15 @@ const Questioner = require('../lib/questioner/questioner');
   result.isMale = await yesNoQuestion('Are you male?', {
     defaultAnswer: true,
   });
-  result.age = await generalQuestion('What is your age?', {
-    possibleChars: [...'0123456789'],
-  });
+  result.age = parseFloat(
+    await generalQuestion('What is your age?', {
+      possibleChars: [...'0123456789'],
+    })
+  );
   result.phone = await generalQuestion('What is your phone number?', {
     possibleChars: [...'+-()0123456789'],
     validate: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im,
-    validateErrMessage: "Error: it isn't phone number",
+    validateErrMessage: "it isn't phone number",
   });
   result.password = await passQuestion('Your password:', {
     minLength: 6,
