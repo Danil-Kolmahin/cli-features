@@ -3,7 +3,12 @@
 const Questioner = require('../lib/questioner/questioner');
 
 (async () => {
-  const { generalQuestion, passQuestion, yesNoQuestion } = new Questioner({
+  const {
+    generalQuestion,
+    passQuestion,
+    yesNoQuestion,
+    alternativeQuestion,
+  } = new Questioner({
     input: process.stdin,
     output: process.stdout,
   });
@@ -28,6 +33,21 @@ const Questioner = require('../lib/questioner/questioner');
   result.password = await passQuestion('Your password:', {
     minLength: 6,
   });
+  result.profession = await alternativeQuestion('What is your profession?', [
+    'Cleaner',
+    'Gardener',
+    'Plumber',
+    'Dishwasher',
+  ]);
+  result.professionalSkills = await alternativeQuestion(
+    'What abilities do you have?',
+    {
+      Cleaning: false,
+      Gardening: false,
+      Plumbing: true,
+      Dishwashing: false,
+    }
+  );
 
   console.log(result);
 })();
