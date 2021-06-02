@@ -1,4 +1,9 @@
-# cli-features
+```
+┌─┐┬  ┬   ┌─┐┌─┐┌─┐┌┬┐┬ ┬┬─┐┌─┐┌─┐
+│  │  │───├┤ ├┤ ├─┤ │ │ │├┬┘├┤ └─┐
+└─┘┴─┘┴   └  └─┘┴ ┴ ┴ └─┘┴└─└─┘└─┘
+```
+
 Convenient interface for communicating with the user from the command line
 
 Base Usage:
