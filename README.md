@@ -1,13 +1,8 @@
-```
- ██████╗██╗     ██╗      ███████╗███████╗ █████╗ ████████╗██╗   ██╗██████╗ ███████╗███████╗
-██╔════╝██║     ██║      ██╔════╝██╔════╝██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██╔════╝██╔════╝
-██║     ██║     ██║█████╗█████╗  █████╗  ███████║   ██║   ██║   ██║██████╔╝█████╗  ███████╗
-██║     ██║     ██║╚════╝██╔══╝  ██╔══╝  ██╔══██║   ██║   ██║   ██║██╔══██╗██╔══╝  ╚════██║
-╚██████╗███████╗██║      ██║     ███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║███████╗███████║
- ╚═════╝╚══════╝╚═╝      ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝                                                                   
-```
+&thinsp;┌─┐┬&emsp;&thinsp;&thinsp;┬&emsp; &emsp; &emsp; &thinsp;&thinsp;&thinsp;&thinsp;┌─┐┌─┐&thinsp;┌─┐┌┬┐&thinsp;┬&nbsp;&thinsp;&thinsp;┬┬─┐┌─┐┌─┐<br/>
+&nbsp;│&ensp; &nbsp;&thinsp; │&emsp; &thinsp;│&emsp; ───&ensp;&nbsp;&thinsp; ├┤&ensp; ├┤&ensp; ├─┤&ensp; │&ensp;&thinsp; │&ensp; │├┬┘├┤&nbsp;&thinsp; └─┐<br/>
+&thinsp;└─┘┴─┘┴&emsp; &emsp; &ensp; &nbsp; &nbsp; &thinsp;└&ensp; &nbsp;&nbsp;&thinsp;└─┘┴&ensp; ┴&nbsp;&thinsp;&thinsp;┴&ensp;&thinsp;&thinsp;└─┘┴└─└─┘└─┘<br/>
 
-Convenient interface for communicating with the user from the command line
+Convenient interface for communicating with user from command line
 
 Base Usage:
 ```js
