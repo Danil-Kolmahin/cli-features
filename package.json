@@ -1,7 +1,7 @@
 {
   "name": "cli-features",
   "version": "1.0.1",
-  "description": "Convenient interface for communicating with the user from the command line",
+  "description": "Convenient interface for communicating with user from command line",
   "main": "cli-features.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
