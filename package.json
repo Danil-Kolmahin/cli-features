@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/KolmaginDanil/cli-features#readme",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.27.0",
     "prettier": "2.2.1"
   }
 }
