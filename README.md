@@ -41,7 +41,7 @@ Examples: [1_generalQuestion.js](./examples/1_generalQuestion.js)
 
 ## Alternative question
 
-####alternativeQuestion(
+#### alternativeQuestion(
 * **questionStr**: `string` - the line that will be printed at the start of the poll. **(mandatory)**
 * **answers**: `array[string] || object{string: boolean}` - possible answer options. If answers is an object, then instead of choosing one option, it becomes possible to select several (you can also specify which options will be enabled by default, by specifying the true key). **(mandatory)**
 * **options**: {
@@ -49,7 +49,7 @@ Examples: [1_generalQuestion.js](./examples/1_generalQuestion.js)
   - _startWith_: `number` - starting element index
   - _isRounded_: `boolean` - indicates whether the list looped back<br/>
 }
-####) => `string || array[string]` - selected points
+#### ) => `string || array[string]` - selected points
 
 Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
 
@@ -61,7 +61,7 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
 
 > Remember!!! Esc sequences must be printed, otherwise there will be no effect!!!
 
-####EscSequences{
+#### EscSequences{
 * **movement** {
   - _moveRelX_ (**dx** `number`) - moves the cursor along the x-axis by **dx** columns
   - _moveRelY_ (**dy** `number`) - moves the cursor along the y-axis by **dy** rows
@@ -96,6 +96,6 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
     }
 > Possible colors: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'<br/>
 > Their numbers: &emsp;0, &emsp;&emsp;1, &emsp;&emsp;2, &emsp;&emsp;&nbsp;&nbsp;3, &emsp;&emsp;4, &emsp;&emsp;&nbsp;&nbsp;5, &emsp;&emsp;&emsp;6, &emsp;&nbsp;&nbsp;&nbsp;&nbsp;7
-####}
+#### }
 
 Examples: [escSequences.test.js](./lib/escSequences/escSequences.test.js)
