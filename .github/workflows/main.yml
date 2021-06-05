@@ -4,14 +4,12 @@ on: [pull_request, push]
 
 jobs:
   testing:
-
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-    - name: unit tests
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: npm test
-    
+      - uses: actions/checkout@main
+      - name: unit tests
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm test

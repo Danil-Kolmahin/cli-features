@@ -4,7 +4,9 @@
   "description": "Convenient interface for communicating with user from command line",
   "main": "cli-features.js",
   "scripts": {
-    "test": "eslint . && node .\\lib\\escSequences\\escSequences.test.js"
+    "test": "npm run lint && node .\\lib\\escSequences\\escSequences.test.js",
+    "lint": "eslint . && prettier -c \"**/*.js\" \"**/*.md\" \"**/*.yml\"",
+    "fmt": "prettier --write \"**/*.js\" \"**/*.md\" \"**/*.yml\""
   },
   "repository": {
     "type": "git",

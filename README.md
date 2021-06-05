@@ -8,14 +8,16 @@ Convenient interface for communicating with user from command line
 
 - Install: `npm install concolor`
 - Require:
+
 ```js
-  const { Questioner, EscSequences } = require('cli-features');
-  ```
+const { Questioner, EscSequences } = require('cli-features');
+```
+
 - How you can use it:
-    - [base usage](#base-usage)
-    - [general question](#general-question)
-    - [alternative question](#alternative-question)
-    - [esc sequences](#esc-sequences)
+  - [base usage](#base-usage)
+  - [general question](#general-question)
+  - [alternative question](#alternative-question)
+  - [esc sequences](#esc-sequences)
 
 ## Base Usage
 
@@ -45,13 +47,15 @@ Examples: [1_generalQuestion.js](./examples/1_generalQuestion.js)
 ## Alternative question
 
 #### alternativeQuestion(
-* **questionStr**: `string` - the line that will be printed at the start of the poll. **(mandatory)**
-* **answers**: `array[string] || object{string: boolean}` - possible answer options. If answers is an object, then instead of choosing one option, it becomes possible to select several (you can also specify which options will be enabled by default, by specifying the true key). **(mandatory)**
-* **options**: {
+
+- **questionStr**: `string` - the line that will be printed at the start of the poll. **(mandatory)**
+- **answers**: `array[string] || object{string: boolean}` - possible answer options. If answers is an object, then instead of choosing one option, it becomes possible to select several (you can also specify which options will be enabled by default, by specifying the true key). **(mandatory)**
+- **options**: {
   - _maxLength_: `number` - the maximum length of the list, after exceeding which, the list will be partially displayed
   - _startWith_: `number` - starting element index
   - _isRounded_: `boolean` - indicates whether the list looped back<br/>
-}
+    }
+
 #### ) => `string || array[string]` - selected points
 
 Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
@@ -65,30 +69,31 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
 > Remember!!! Esc sequences must be printed, otherwise there will be no effect!!!
 
 #### EscSequences{
-* **movement** {
+
+- **movement** {
   - _moveRelX_ (**dx** `number`) - moves the cursor along the x-axis by **dx** columns
   - _moveRelY_ (**dy** `number`) - moves the cursor along the y-axis by **dy** rows
   - _moveRel_ (**dx** `number`, **dy** `number`) - moves the cursor along the x-axis by **dx** columns and along the y-axis by **dy** rows
   - _moveAbsX_ (**x** `number`) - moves the cursor to the point corresponding to the coordinate **x**
   - _moveAbsY_ (**y** `number`) - moves the cursor to the point corresponding to the coordinate **y**
   - _moveAbs_ (**x** `number`, **y** `number`) - moves the cursor to the point corresponding to the coordinates **x**, **y**<br/>
-}
-* **visibility** {
+    }
+- **visibility** {
   - _setInvisibleMode_ () - makes the cursor invisible
   - _setVisibleMode_ () - makes the cursor visible<br/>
-}
-* **deleting** {
+    }
+- **deleting** {
   - _deleteStartToCur_ () - clears the line from the current cursor position to the end of the line
   - _deleteCurToEnd_ () - clears the line from the beginning of the line to the current cursor position
   - _deleteAllLine_ () - clears the whole line<br/>
     }
-* **decoration** {
+- **decoration** {
   - _normal_ - character after which everything printed will have its original form
-  - _bold_ (**string**  `string`) - makes the text **bold**
-  - _underlined_ (**string**  `string`) - makes text underlined
-  - _invert_ (**string**  `string`) - inverts the color of the text
+  - _bold_ (**string** `string`) - makes the text **bold**
+  - _underlined_ (**string** `string`) - makes text underlined
+  - _invert_ (**string** `string`) - inverts the color of the text
   - _setForegroundColor_ (**color** `number || string`, **isBright** `boolean`) - set text foreground **color**, if **isBright** is true, then another color pad will be used
-  - _setBackgroundColor_  (**color** `number || string`, **isBright** `boolean`) - set text background **color**, if **isBright** is true, then another color pad will be used
+  - _setBackgroundColor_ (**color** `number || string`, **isBright** `boolean`) - set text background **color**, if **isBright** is true, then another color pad will be used
   - _setTheme_ ({
     **options** = `array[string]`,
     **foregroundColor** `number || string`,
@@ -97,8 +102,9 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
     **isBackColorBright** `boolean`,
     }) - **foregroundColor** and **isForeColorBright** correspond to color and isBright from setForegroundColor (), so do **backgroundColor** and **isBackColorBright**, in options you can pass something like `['bold', 'underlined']`, to styling the text<br/>
     }
-> Possible colors: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'<br/>
-> Their numbers: &emsp;0, &emsp;&emsp;1, &emsp;&emsp;2, &emsp;&emsp;&nbsp;&nbsp;3, &emsp;&emsp;4, &emsp;&emsp;&nbsp;&nbsp;5, &emsp;&emsp;&emsp;6, &emsp;&nbsp;&nbsp;&nbsp;&nbsp;7
+    > Possible colors: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'<br/>
+    > Their numbers: &emsp;0, &emsp;&emsp;1, &emsp;&emsp;2, &emsp;&emsp;&nbsp;&nbsp;3, &emsp;&emsp;4, &emsp;&emsp;&nbsp;&nbsp;5, &emsp;&emsp;&emsp;6, &emsp;&nbsp;&nbsp;&nbsp;&nbsp;7
+
 #### }
 
 Examples: [escSequences.test.js](./lib/escSequences/escSequences.test.js)
