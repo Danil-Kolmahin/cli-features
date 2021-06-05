@@ -4,7 +4,7 @@
   "description": "Convenient interface for communicating with user from command line",
   "main": "cli-features.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint . && node .\\lib\\escSequences\\escSequences.test.js"
   },
   "repository": {
     "type": "git",

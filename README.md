@@ -7,7 +7,10 @@ Convenient interface for communicating with user from command line
 ## Main memo
 
 - Install: `npm install concolor`
-- Require: `const { Questioner, EscSequences } = require('cli-features');`
+- Require:
+```js
+  const { Questioner, EscSequences } = require('cli-features');
+  ```
 - How you can use it:
     - [base usage](#base-usage)
     - [general question](#general-question)
@@ -80,10 +83,10 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
   - _deleteAllLine_ () - clears the whole line<br/>
     }
 * **decoration** {
-  - _normal_ () - character after which everything printed will have its original form
-  - _bold_ () - makes the text **bold**
-  - _underlined_ () - makes text underlined
-  - _invert_ () - inverts the color of the text
+  - _normal_ - character after which everything printed will have its original form
+  - _bold_ (**string**  `string`) - makes the text **bold**
+  - _underlined_ (**string**  `string`) - makes text underlined
+  - _invert_ (**string**  `string`) - inverts the color of the text
   - _setForegroundColor_ (**color** `number || string`, **isBright** `boolean`) - set text foreground **color**, if **isBright** is true, then another color pad will be used
   - _setBackgroundColor_  (**color** `number || string`, **isBright** `boolean`) - set text background **color**, if **isBright** is true, then another color pad will be used
   - _setTheme_ ({
