@@ -4,7 +4,7 @@
   "description": "Convenient interface for communicating with user from command line",
   "main": "cli-features.js",
   "scripts": {
-    "test": "npm run lint && node .\\lib\\escSequences\\escSequences.test.js",
+    "test": "npm run lint && jest",
     "lint": "eslint . && prettier -c \"**/*.js\" \"**/*.md\" \"**/*.yml\"",
     "fmt": "prettier --write \"**/*.js\" \"**/*.md\" \"**/*.yml\""
   },
@@ -28,6 +28,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.27.0",
+    "jest": "^27.0.4",
     "prettier": "2.2.1"
   }
 }
