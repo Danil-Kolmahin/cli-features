@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.2][] - 6 Jun 2021
+
+- Changes to the print method, replacing the increment with an args list
+- Some small refactorings
+
 ## [1.2.1][] - 5 Jun 2021
 
 - Added error processing, some renaming
@@ -25,6 +30,7 @@
 
 - Finished base implementation
 
+[1.2.2]: https://github.com/KolmaginDanil/cli-features/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/KolmaginDanil/cli-features/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/KolmaginDanil/cli-features/v1.0.1...v1.2.0
 [1.0.1]: https://github.com/KolmaginDanil/cli-features/v1.0.0...v1.0.1

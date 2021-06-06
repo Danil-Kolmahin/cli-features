@@ -29,8 +29,8 @@ const Questioner = require('../lib/questioner/questioner');
   );
 
   const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-  result.colors = await alternativeQuestion(
-    'What is your favorite numbers?',
+  result.number = await alternativeQuestion(
+    'What is your favorite number?',
     numbers,
     { maxLength: 5 }
   );
