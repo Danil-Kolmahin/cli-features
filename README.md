@@ -107,4 +107,4 @@ Examples: [2_alternativeQuestion.js](./examples/2_alternativeQuestion.js)
 
 #### }
 
-Examples: [escSequences.test.js](./lib/escSequences/escSequences.test.js)
+Examples: [escSequences.test.ts](lib/escSequences/escSequences.test.ts)

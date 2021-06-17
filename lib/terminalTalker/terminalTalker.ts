@@ -1,7 +1,8 @@
 'use strict';
 
-class TerminalTalker {
-  constructor({ input }) {
+export class TerminalTalker {
+  private stdin: NodeJS.ReadStream;
+  constructor({ input }: { input: NodeJS.ReadStream }) {
     this.stdin = input;
   }
 
@@ -9,7 +10,7 @@ class TerminalTalker {
     return this.stdin.isRaw;
   }
 
-  setRawMode = (boolFlag) => this.stdin.setRawMode(boolFlag);
+  setRawMode = (boolFlag: boolean) => this.stdin.setRawMode(boolFlag);
 
   listenSingleChar = () => {
     const { stdin, setRawMode } = this;
@@ -27,5 +28,3 @@ class TerminalTalker {
     });
   };
 }
-
-module.exports = TerminalTalker;

@@ -18,7 +18,7 @@
 - Added startWith, maxLength and isRounded option to alternativeQuestion
 - EscSequences refactoring
 - Added eslint
-- Small refactoring keysAndActions.js and questioner.js
+- Small refactoring keysAndActions.ts and questioner.ts
 - Expansion and addition to README.md
 
 ## [1.0.1][] - 1 Jun 2021

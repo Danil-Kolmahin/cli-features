@@ -1,6 +1,6 @@
 'use strict';
 
-const TerminalTalker = require('../terminalTalker/terminalTalker');
+import { TerminalTalker } from '../terminalTalker/terminalTalker';
 const makeActionsArray = require('../keysAndActions/keysAndActions');
 const {
   forGeneralQuestions,
@@ -15,7 +15,17 @@ const { bold, setTheme } = require('../escSequences/escSequences').decoration;
 const { ALPHABET, UPPER_ALPHABET } = require('../keysNames').multitudes;
 
 class Questioner {
-  constructor({ input, output }) {
+  private stdout: NodeJS.WriteStream;
+  private tt: TerminalTalker;
+  public numColumns: number;
+  public numRows: number;
+  constructor({
+    input,
+    output,
+  }: {
+    input: NodeJS.ReadStream;
+    output: NodeJS.WriteStream;
+  }) {
     this.stdout = output;
     this.tt = new TerminalTalker({ input });
     [this.numColumns, this.numRows] = output.getWindowSize();
@@ -39,20 +49,18 @@ class Questioner {
 
   posAndNegAnswers = [['yes'], ['no']]; // will be changed in 2.0
 
-  checkYesOrNo = (str, defaultAnswer) => {
+  checkYesOrNo = (str: string, defaultAnswer: boolean) => {
     // will be changed in 2.0
     const { posAndNegAnswers } = this;
     const input = str.toLowerCase();
-    const check = (arr) =>
+    const check = (arr: string[]) =>
       arr.some((word) => word.startsWith(input) || input.startsWith(word));
     const isPositive = check(posAndNegAnswers[0]);
     const isNegative = check(posAndNegAnswers[1]);
     return [isPositive || isNegative, defaultAnswer ? isPositive : !isNegative];
   };
 
-  print = (...args) => {
-    if (args.some((str) => typeof str !== 'string'))
-      throw 'You try to print noString value: ' + JSON.stringify(args);
+  print = (...args: string[]): void => {
     this.stdout.write(args.join(''));
   };
 
@@ -66,7 +74,7 @@ class Questioner {
         rule.onKeyPress(resp);
     });
 
-  _question = async (
+  _question: generalQuestionT = async (
     questionStr = '',
     {
       hideCursor = false,
@@ -76,7 +84,7 @@ class Questioner {
       validate,
       validateErrMessage = "your text isn't valid",
       possibleChars = [...ALPHABET, ...UPPER_ALPHABET],
-    } = {}
+    }
   ) => {
     const {
       tt,
@@ -103,17 +111,15 @@ class Questioner {
         {
           confirm: () => (continueWaiting = false),
           print,
-          changeCurrentStr: (newStr) => (currentStr = newStr),
-          incrementCurrentPosition: (incrementValue) =>
+          changeCurrentStr: (newStr: string) => (currentStr = newStr),
+          incrementCurrentPosition: (incrementValue: number) =>
             (position += incrementValue),
           validationFunc:
             validate &&
-            ((str) => {
+            ((str: string) => {
               if (typeof validate === 'function') return validate(str);
-              if (typeof validate === 'object' && validate.test) {
-                const res = str.match(validate);
-                return res ? res[0] === str : false;
-              }
+              const res = str.match(validate);
+              return res ? res[0] === str : false;
             }),
         },
         {
@@ -153,12 +159,11 @@ class Questioner {
     return currentStr;
   };
 
-  generalQuestion = async (...args) => this._question(...args);
+  generalQuestion: generalQuestionT = async (...args) =>
+    this._question(...args);
 
-  passQuestion = async (...args) => {
+  passQuestion: generalQuestionT = async (...args) => {
     // will be changed in 2.0
-    if (args.length < 1) args.push('');
-    if (args.length < 2) args.push({});
     args[1].passMode = true;
     return this._question(...args);
   };
@@ -170,17 +175,17 @@ class Questioner {
     if (args.length < 2) args.push({});
     if (args[1].defaultAnswer === undefined) args[1].defaultAnswer = true;
     const { defaultAnswer, validateErrMessage } = args[1];
-    args[1].validate = (str) => checkYesOrNo(str, defaultAnswer)[0];
+    args[1].validate = (str: string) => checkYesOrNo(str, defaultAnswer)[0];
     if (!validateErrMessage) args[1].validateErrMessage = "it isn't yes or no";
     args[0] += ` (${defaultAnswer ? 'Y' : 'y'}/${defaultAnswer ? 'n' : 'N'})`;
     const answer = await this._question(...args);
     return checkYesOrNo(answer, defaultAnswer)[1];
   };
 
-  alternativeQuestion = async (
+  alternativeQuestion: alternativeQuestionT = async (
     questionStr = '',
     answers = [],
-    { maxLength = this.numRows, startWith = 0, isRounded = false } = {}
+    { maxLength = this.numRows, startWith = 0, isRounded = false }
   ) => {
     const {
       tt,
@@ -195,13 +200,13 @@ class Questioner {
     const { setRawMode, listenSingleChar } = tt;
 
     const withPin = !Array.isArray(answers);
-    const answersArr = withPin ? Object.keys(answers) : answers;
+    const answersArr = (withPin ? Object.keys(answers) : answers) as string[];
     const len = answersArr.length;
 
     if (isRounded && maxLength >= len) maxLength = len;
     if (maxLength < 3) maxLength = 1;
 
-    const redraw = (selectedPosition, answers) => {
+    const redraw = (selectedPosition: number, answers: string[] | objAns) => {
       let toPrintArr = answersArr.map((answer, i) => {
         if (withPin)
           return (
@@ -257,7 +262,7 @@ class Questioner {
         {
           confirm: () => (continueWaiting = false),
           print,
-          changeCurrentPosition: (value) => (position = value),
+          changeCurrentPosition: (value: number) => (position = value),
           redraw,
         },
         {
@@ -289,5 +294,32 @@ class Questioner {
       : answers[position];
   };
 }
+
+type generalQuestionT = (
+  questionStr: string,
+  options: {
+    hideCursor?: boolean;
+    passMode?: boolean;
+    maxLength?: number;
+    minLength?: number;
+    validate?: (str: string) => boolean | RegExp;
+    validateErrMessage?: string;
+    possibleChars: string[];
+  }
+) => Promise<string>;
+
+type objAns = {
+  [key: string]: boolean;
+};
+
+type alternativeQuestionT = (
+  questionStr: string,
+  answers: string[] | objAns,
+  options: {
+    maxLength?: number;
+    startWith?: number;
+    isRounded?: boolean;
+  }
+) => Promise<string | string[]>;
 
 module.exports = Questioner;

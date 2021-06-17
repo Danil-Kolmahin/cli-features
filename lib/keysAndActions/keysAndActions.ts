@@ -1,43 +1,48 @@
 'use strict';
 
-const {
-  moveRelX,
-  moveRelY,
-  moveAbsX,
-} = require('../escSequences/escSequences').movement;
-const {
-  deleteCurToEnd,
-  deleteAllLine,
-} = require('../escSequences/escSequences').deleting;
-const {
-  ARROW_LEFT,
-  ARROW_RIGHT,
-  ARROW_UP,
-  ARROW_DOWN,
-  ENTER,
-  BACKSPACE,
-  DELETE,
-} = require('../keysNames').keysNames;
-const { ALPHABET, UPPER_ALPHABET } = require('../keysNames').multitudes;
+import { movement, deleting } from '../escSequences/escSequences';
+
+const { moveRelX, moveRelY, moveAbsX } = movement;
+const { deleteCurToEnd, deleteAllLine } = deleting;
+
+import { keysNames, multitudes } from '../keysNames';
 
 const ALWAYS_LAST = 'ALWAYS_LAST';
 const ALWAYS_FIRST = 'ALWAYS_FIRST';
 
-class makeActionsArray {
-  prepareListenersArray = (selectedListeners, customListeners) => {
-    let resultListenersArray = [];
+type ListenerT = {
+  name: string;
+  keys?: string[];
+  onKeyPress?: () => void;
+};
+
+type reqListenerT = Required<ListenerT>;
+
+interface makeActionsArrayI {
+  prepareListenersArray(
+    selectedListeners: string[],
+    customListeners: Array<ListenerT>
+  ): Array<reqListenerT>;
+  constructor(): Array<reqListenerT>;
+}
+
+class makeActionsArray implements makeActionsArrayI {
+  prepareListenersArray = (
+    selectedListeners: string[],
+    customListeners: Array<ListenerT>
+  ) => {
+    let resultListenersArray: Array<reqListenerT> = [];
     const uniqueListeners = new Set();
 
     // prepare selectedListeners
     selectedListeners.forEach((listener) => {
-      if (typeof listener !== 'string') return;
       const foundListener = this.listeners.find(
         (candidate) => candidate.name === listener
       );
       if (foundListener === undefined) return;
       if (uniqueListeners.has(foundListener.name)) return;
       uniqueListeners.add(foundListener.name);
-      resultListenersArray.push(foundListener);
+      resultListenersArray.push(foundListener as reqListenerT);
     });
 
     // prepare customListeners
@@ -63,7 +68,7 @@ class makeActionsArray {
     });
 
     // sort by number of keys
-    const getKeysLength = (obj) => {
+    const getKeysLength = (obj: reqListenerT) => {
       if (obj.keys[0] === ALWAYS_LAST) return Infinity;
       if (obj.keys[0] === ALWAYS_FIRST) return -Infinity;
       return obj.keys.reduce((acc, cur) => acc + cur.length, 0);
@@ -74,6 +79,8 @@ class makeActionsArray {
 
     return resultListenersArray;
   };
+
+  private readonly constants: {};
 
   constructor(
     functions = {},
@@ -144,7 +151,7 @@ class makeActionsArray {
 
     {
       name: 'onEnterPress',
-      keys: [ENTER],
+      keys: [keysNames.ENTER],
       onKeyPress: ({ currentStr, position }) => {
         const { confirm, createErr, print, validationFunc } = this.functions;
         const { minLength, validateErrMessage } = this.constants;
@@ -167,7 +174,7 @@ class makeActionsArray {
 
     {
       name: 'onSomeLetter',
-      keys: [...ALPHABET, ...UPPER_ALPHABET],
+      keys: [...multitudes.ALPHABET, ...multitudes.UPPER_ALPHABET],
       onKeyPress: ({ currentStr, char, position }) => {
         const { writeSingleChar, print } = this.functions;
         print(writeSingleChar({ currentStr, char, position }));
@@ -176,10 +183,10 @@ class makeActionsArray {
 
     {
       name: 'leftAndRight',
-      keys: [ARROW_LEFT, ARROW_RIGHT],
+      keys: [keysNames.ARROW_LEFT, keysNames.ARROW_RIGHT],
       onKeyPress: ({ position, char, currentStr }) => {
         const { incrementCurrentPosition, print } = this.functions;
-        const isLeft = char === ARROW_LEFT;
+        const isLeft = char === keysNames.ARROW_LEFT;
         const newPosition = isLeft ? -1 : +1;
         if (
           (position > 0 && isLeft) ||
@@ -193,7 +200,7 @@ class makeActionsArray {
 
     {
       name: 'backspaceAndDelete',
-      keys: [BACKSPACE, DELETE],
+      keys: [keysNames.BACKSPACE, keysNames.DELETE],
       onKeyPress: ({ currentStr, position, char }) => {
         const {
           incrementCurrentPosition,
@@ -227,17 +234,17 @@ class makeActionsArray {
 
     {
       name: 'onAlternativeEnterPress',
-      keys: [ENTER],
+      keys: [keysNames.ENTER],
       onKeyPress: () => this.functions.confirm(),
     },
 
     {
       name: 'alternativeUpAndDown',
-      keys: [ARROW_UP, ARROW_DOWN],
+      keys: [keysNames.ARROW_UP, keysNames.ARROW_DOWN],
       onKeyPress: ({ position, char, answers }) => {
         const { changeCurrentPosition, print, redraw } = this.functions;
         const { maxLength, len, isRounded } = this.constants;
-        let newPosition = position + (char === ARROW_UP ? -1 : +1);
+        let newPosition = position + (char === keysNames.ARROW_UP ? -1 : +1);
         if (isRounded && newPosition === len) newPosition = 0;
         if (isRounded && newPosition === -1) newPosition = len - 1;
         if (newPosition >= 0 && newPosition < len) {
@@ -257,11 +264,12 @@ class makeActionsArray {
 
     {
       name: 'alternativeLeftAndRight',
-      keys: [ARROW_LEFT, ARROW_RIGHT],
+      keys: [keysNames.ARROW_LEFT, keysNames.ARROW_RIGHT],
       onKeyPress: ({ position, char, answers }) => {
         const { print, redraw } = this.functions;
         const { maxLength } = this.constants;
-        answers[Object.keys(answers)[position]] = char === ARROW_RIGHT;
+        answers[Object.keys(answers)[position]] =
+          char === keysNames.ARROW_RIGHT;
         const resultData = redraw(position, answers);
         let result = moveRelY(maxLength);
         for (let i = 0; i < maxLength; i++)
