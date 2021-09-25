@@ -14,7 +14,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": null
+        "url": "https://api.github.com/"
       },
       "response": []
     },
@@ -26,9 +26,15 @@
       },
       "request": {
         "method": "GET",
-        "header": [],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "token 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",
+            "type": "text"
+          }
+        ],
         "url": {
-          "raw": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
+          "raw": "https://api.github.com/search/code?q=user:KolmaginDanil+repo:MyTranslator",
           "protocol": "https",
           "host": [
             "api",
@@ -42,11 +48,7 @@
           "query": [
             {
               "key": "q",
-              "value": "{query}{"
-            },
-            {
-              "key": "page,per_page,sort,order}",
-              "value": null
+              "value": "user:KolmaginDanil+repo:MyTranslator"
             }
           ]
         }
