@@ -17,6 +17,41 @@
         "url": null
       },
       "response": []
+    },
+    {
+      "name": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
+      "id": "5e537bd8-1131-4aed-b60e-ca57c9f2eba0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "github",
+            "com"
+          ],
+          "path": [
+            "search",
+            "code"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "{query}{"
+            },
+            {
+              "key": "page,per_page,sort,order}",
+              "value": null
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
