@@ -14,7 +14,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": null
+        "url": "https://api.github.com/"
       },
       "response": []
     },
